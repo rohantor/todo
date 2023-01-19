@@ -1,0 +1,48 @@
+.ElementContainer{
+ width: 30vw;
+ height: 600px;
+ margin: auto;
+ border: 1px solid black;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ 
+}
+.InputContainer
+{
+width: 40vw;
+ border: 1px solid black;
+
+
+}
+.DoneOuterBox{
+    background-color: green;
+    min-height: 500px;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    text-align: center;
+    margin: auto;
+}
+.DoneInsertBox{
+    width: 218px;
+    height: 80px;
+    background-color: red;
+    margin: auto;
+    margin-top: 19px;
+    margin-bottom: -42px;
+}
+.DoneBoxContainer{
+    width: 218px;
+    min-height: 316px;
+    max-height: 316px;
+    margin: auto;
+}
+section{
+
+ justify-content: space-between;
+ display: flex;
+ flex-direction: row;
+ 
+}

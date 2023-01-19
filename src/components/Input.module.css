@@ -1,0 +1,16 @@
+.textarea{
+    font-size: 25px;
+    height: 70px;
+    max-height:300px;
+    width: 37vw;
+    min-width:37vw;
+}
+.buttonSubmit{
+ position: relative;
+    right: -30%;
+    margin-top:1rem;
+    width: 150px;
+    background-color: aquamarine;
+    border-radius: 1rem;
+    height: 50px;
+   }
