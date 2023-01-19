@@ -1,11 +1,12 @@
 import { DragEvent } from 'react'
 import style from './Element.module.css'
 
+
 export default function Element({
                         ele,
                         index,
                       }: {
-                        ele: number
+                        ele: string
                         index: number
                       }) 
 {
@@ -25,13 +26,17 @@ export default function Element({
     return randomColor;
   }
   return (
-    <div
-      className={style.container}
-      draggable={true}
-      onDragStart={handleDragStart}
-      style={{backgroundColor:`#${Random()}`}}
-    >
-      {ele}
-    </div>
+    <>
+      <div
+        className={style.container}
+        draggable={true}
+        onDragStart={handleDragStart}
+        style={{ backgroundColor: `#${Random()}` }}
+      >
+        {ele.length > 20 ? ele.slice(0, 20) : ele}
+        {ele.length > 20 ? (<p className={style.tooltip}>{ele}</p>) : ele}
+        
+      </div>
+    </>
   )
 }

@@ -5,12 +5,9 @@ import style from './Homepage.module.css'
 import { nanoid } from 'nanoid'
 import Input from '../components/Input'
 export default function Homepage() {
-  const [ToDoelements, setToDoelements] = useState(ElementData)
-  const [DoneElements, setDoneElements] = useState<Array<number>>([])
-  const [seletedElement, setSelectedElement] = useState(null)
-  // const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
-  //   event.dataTransfer.setData('text', event.currentTarget.id)
-  // }
+  const [ToDoelements, setToDoElements] = useState<Array<string>>([])
+  const [DoneElements, setDoneElements] = useState<Array<string>>([])
+
   const enableDropping = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
   }
@@ -19,10 +16,14 @@ export default function Homepage() {
     const index = event.dataTransfer.getData('index')
     const rgb = event.dataTransfer.getData('color')
     let temp = DoneElements
+
     if (temp.length === 5) {
       temp.splice(4, 1)
     }
     setDoneElements([ToDoelements[parseInt(index)], ...temp])
+
+    setToDoElements((prv) => prv.filter((_, i) => i !== parseInt(index)))
+
     console.log(index)
     console.log(rgb)
   }
@@ -50,7 +51,7 @@ export default function Homepage() {
         / */}
         <div className={style.InputContainer}>
           Enter Here
-          <Input></Input>
+          <Input setToDoElements={setToDoElements} />
         </div>
         {/* //
         

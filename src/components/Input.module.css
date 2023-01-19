@@ -1,9 +1,10 @@
-.textarea{
+.textareaInput{
     font-size: 25px;
-    height: 70px;
+    min-height: 70px;
     max-height:300px;
-    width: 37vw;
+    
     min-width:37vw;
+    max-width:37vw;
 }
 .buttonSubmit{
  position: relative;
