@@ -6,7 +6,7 @@ export default function Element({
   ele,
   index,
 }: {
-  ele: string
+  ele: {text:string,color:string}
   index: number
 }) {
   const handleDragStart = (event: DragEvent<HTMLDivElement>) => {
@@ -26,10 +26,10 @@ export default function Element({
         className={style.container}
         draggable={true}
         onDragStart={handleDragStart}
-        style={{ backgroundColor: `#${Random()}` }}
+        style={{ backgroundColor: `#${ele.color}` }}
       >
-        {ele.length > 20 ? ele.slice(0, 20) : ele}
-        {ele.length > 20 ? <p className={style.tooltip}>{ele}</p> : true}
+        {ele.text.length > 20 ? ele.text.slice(0, 20) : ele.text}
+        {ele.text.length > 20 ? <p className={style.tooltip}>{ele.text}</p> : true}
       </div>
     </>
   )

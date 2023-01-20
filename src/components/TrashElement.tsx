@@ -2,22 +2,20 @@ import style from './Element.module.css'
 
 export default function Element({
   ele,
-  
 }: {
-  ele: string
-  
+  ele: {
+    text: string
+    color: string
+  }
 }) {
- 
-
   return (
     <>
       <div
         className={style.container}
-        
-        style={{ backgroundColor: 'greenyellow', textDecoration:'line-through'}}
+        style={{ backgroundColor: `#${ele.color}`,textDecoration: 'line-through',} }
+       
       >
-        {ele.length > 20 ? ele.slice(0, 20) : ele}
-        
+        {ele.text.length > 20 ? ele.text.slice(0, 20) : ele.text}
       </div>
     </>
   )

@@ -5,8 +5,10 @@ import Input from '../components/Input'
 import TrashElement from '../components/TrashElement'
 
 export default function Homepage() {
-  const [ToDoelements, setToDoElements] = useState<Array<{text:string}>>([])
-  const [DoneElements, setDoneElements] = useState<Array<{ text: string }>>([])
+  const [ToDoelements, setToDoElements] = useState<Array<{text:string,color:string}>>([])
+  const [DoneElements, setDoneElements] = useState<
+    Array<{ text: string; color: string }>
+  >([])
 
   const enableDropping = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
@@ -40,7 +42,7 @@ export default function Homepage() {
           {ToDoelements.map((element, index) => {
             return (
               <>
-                <Element ele={element.text} index={index}></Element>
+                <Element ele={element} index={index}></Element>
               </>
             )
           })}
@@ -71,7 +73,7 @@ export default function Homepage() {
               {DoneElements.map((element, index) => {
                 return (
                   <>
-                    <TrashElement ele={element.text}></TrashElement>
+                    <TrashElement ele={element}></TrashElement>
                   </>
                 )
               })}
