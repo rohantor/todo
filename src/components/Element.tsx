@@ -48,6 +48,9 @@ export default function Element({
     console.log('Double Click')
   }
     const SaveState =()=>{
+      if (textInput === '') {
+        setTextInput(ele.text)
+      } 
       setToDoElements((prv) => {
         let newPrv = prv
         newPrv[index].text = textInput
@@ -55,6 +58,7 @@ export default function Element({
       })
     }
   function HandleOnchange(event: ChangeEvent<HTMLInputElement>): void {
+     
     setTextInput(event.target.value)
   }
 

@@ -1,11 +1,13 @@
 .container {
   width: 200px;
-  height: 50px;
-
+  min-height: 50px;
+  border-radius: 1rem;
   padding: 10px;
   border: 2px solid black;
-  margin: auto ;
+  /* margin: auto ; */
   border: '1px solid ';
+
+
 }
 .container input{
 
@@ -15,13 +17,13 @@
 
 }
 .tooltip {
-    position: relative;
+    position: absolute;
     visibility: hidden;
     text-overflow:ellipsis;
   overflow:hidden; 
   word-wrap:break-word;
-    right: -18rem;
-    top: -3rem;
+    right: 50%;
+    top: 50%;
     height: 143px;
     width: 384px;
     background-color: #3d393966;

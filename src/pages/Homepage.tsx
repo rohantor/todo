@@ -14,17 +14,13 @@ export default function Homepage() {
     event.preventDefault()
   }
 
-  const MakeEmpty = ()=>{
-    setDoneElements([])
-  }
+  
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     const index = event.dataTransfer.getData('index')
     const rgb = event.dataTransfer.getData('color')
     let temp = DoneElements
 
-    if (temp.length === 5) {
-      temp.splice(4, 1)
-    }
+    
     setDoneElements([ToDoelements[parseInt(index)], ...temp])
 
     setToDoElements((prv) => prv.filter((_, i) => i !== parseInt(index)))
@@ -32,9 +28,16 @@ export default function Homepage() {
     console.log(index)
     console.log(rgb)
   }
+  const DeleteNode = (index:number)=>{
+      setDoneElements((prv) => prv.filter((e, i) => i !== index))
+  }
   return (
     <div>
-      <h1>Homepage</h1>
+      <h1>
+        To
+        <img src='./todo.png' style={{ width: '100px' }}></img>
+        Do
+      </h1>
       <section>
         {/* //
         
@@ -66,42 +69,31 @@ export default function Homepage() {
         
         Third Componenet
         / */}
-        <div className={style.ElementContainer}>
+        <div
+          className={style.ElementContainer}
+          onDrop={handleDrop}
+          onDragOver={enableDropping}
+        >
           <h1>Done</h1>
-          <div className={style.DoneOuterBox}>
-            <div
-              className={style.DoneInsertBox}
-              onDrop={handleDrop}
-              onDragOver={enableDropping}
-            >
-              <h1 onClick={MakeEmpty}>Throw Here</h1>
-            </div>
+         
+            
             <div className={style.DoneBoxContainer}>
               {DoneElements.map((element, index) => {
                 return (
                   <>
-                    <TrashElement ele={element}></TrashElement>
+                    <div onClick={()=>{
+                      DeleteNode(index) 
+
+                    }}>
+                      <TrashElement ele={element}></TrashElement>
+                    </div>
                   </>
                 )
               })}
             </div>
-          </div>
+         
         </div>
       </section>
-
-      {/* <div>
-        <div id='d1' draggable='true' onDragStart={handleDragStart}>
-          Drag me
-        </div>
-        <div id='d2' draggable='true' onDragStart={handleDragStart}>
-          Or me!
-        </div>
-        <div onDragOver={enableDropping} onDrop={handleDrop}
-        style={{height:'100px',width:'100ox',backgroundColor:'red'}}
-        >
-          Drop Area
-        </div>
-      </div> */}
     </div>
   )
 }
