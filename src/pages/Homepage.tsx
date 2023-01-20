@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Element from '../components/Element'
-import { ElementData } from '../Data/elementdata'
 import style from './Homepage.module.css'
-import { nanoid } from 'nanoid'
 import Input from '../components/Input'
+import TrashElement from '../components/TrashElement'
+
 export default function Homepage() {
   const [ToDoelements, setToDoElements] = useState<Array<string>>([])
   const [DoneElements, setDoneElements] = useState<Array<string>>([])
@@ -71,7 +71,7 @@ export default function Homepage() {
               {DoneElements.map((element, index) => {
                 return (
                   <>
-                    <Element ele={element} index={index}></Element>
+                    <TrashElement ele={element}></TrashElement>
                   </>
                 )
               })}
