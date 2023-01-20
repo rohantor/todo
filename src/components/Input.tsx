@@ -1,7 +1,7 @@
 import React, { useState, Dispatch, SetStateAction, ChangeEvent } from 'react'
 import style from './Input.module.css'
 interface propsInterface {
-  setToDoElements: Dispatch<SetStateAction<string[]>>
+  setToDoElements: Dispatch<SetStateAction<{ text: string }[]>>
 }
 export default function Input(props: propsInterface) {
   const [textAreaInput, setTextAreaInput] = useState('')
@@ -12,7 +12,7 @@ export default function Input(props: propsInterface) {
   const Add = () => {
     if(textAreaInput!==''){
 
-      props.setToDoElements((prv) => [...prv, textAreaInput])
+      props.setToDoElements((prv) => [...prv, {text:textAreaInput}])
       setTextAreaInput('')
     }
   }
