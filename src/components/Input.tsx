@@ -26,6 +26,7 @@ export default function Input(props: propsInterface) {
     <div>
       <textarea
         name=''
+        maxLength={290}
         value={textAreaInput}
         id=''
         cols={60}

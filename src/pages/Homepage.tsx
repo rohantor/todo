@@ -14,6 +14,9 @@ export default function Homepage() {
     event.preventDefault()
   }
 
+  const MakeEmpty = ()=>{
+    setDoneElements([])
+  }
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     const index = event.dataTransfer.getData('index')
     const rgb = event.dataTransfer.getData('color')
@@ -42,7 +45,11 @@ export default function Homepage() {
           {ToDoelements.map((element, index) => {
             return (
               <>
-                <Element ele={element} index={index}></Element>
+                <Element
+                  ele={element}
+                  index={index}
+                  setToDoElements={setToDoElements}
+                ></Element>
               </>
             )
           })}
@@ -67,7 +74,7 @@ export default function Homepage() {
               onDrop={handleDrop}
               onDragOver={enableDropping}
             >
-              <h1>Throw Here</h1>
+              <h1 onClick={MakeEmpty}>Throw Here</h1>
             </div>
             <div className={style.DoneBoxContainer}>
               {DoneElements.map((element, index) => {

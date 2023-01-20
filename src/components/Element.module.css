@@ -1,11 +1,18 @@
 .container {
   width: 200px;
   height: 50px;
-  background-color: rgb(133, 217, 123);
+
   padding: 10px;
   border: 2px solid black;
   margin: auto ;
   border: '1px solid ';
+}
+.container input{
+
+  width: 200px;
+  height: 50px;
+  border: 0px;
+
 }
 .tooltip {
     position: relative;
@@ -24,3 +31,4 @@
   visibility: visible;
   
 }
+
