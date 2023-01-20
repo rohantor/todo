@@ -8,6 +8,8 @@ import {
 } from 'react'
 import style from './Element.module.css'
 
+
+
 export default function Element({
   ele,
   index,
@@ -39,17 +41,19 @@ export default function Element({
   // }
   const handleDoubleClick = () => {
     if (doubleClickToggle) {
+      SaveState()
+    }
+    setdoubleClickToggle((prv) => !prv)
+
+    console.log('Double Click')
+  }
+    const SaveState =()=>{
       setToDoElements((prv) => {
         let newPrv = prv
         newPrv[index].text = textInput
         return newPrv
       })
     }
-    setdoubleClickToggle((prv) => !prv)
-
-    console.log('Double Click')
-  }
-
   function HandleOnchange(event: ChangeEvent<HTMLInputElement>): void {
     setTextInput(event.target.value)
   }
@@ -71,6 +75,7 @@ export default function Element({
             autoFocus
             maxLength={290}
             style={{ backgroundColor: `#${ele.color}` }}
+            onBlur={SaveState}
           ></input>
         ) : textInput.length > 20 ? (
           textInput.slice(0, 20)
