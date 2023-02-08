@@ -1,13 +1,13 @@
 import style from './Element.module.css'
 
-export default function Element({ele}: {
-                                        ele: {
-                                        text: string
-                                        color: string
-                                        }
-                        })
-{
-  
+export default function Element({
+  ele,
+}: {
+  ele: {
+    text: string
+    color: string
+  }
+}) {
   return (
     <>
       <div
@@ -19,7 +19,6 @@ export default function Element({ele}: {
       >
         {ele.text.length > 20 ? ele.text.slice(0, 20) : ele.text}
         <br />
-        
       </div>
     </>
   )

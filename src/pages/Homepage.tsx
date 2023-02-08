@@ -50,6 +50,7 @@ export default function Homepage() {
             return (
               <>
                 <Element
+                  key={index}
                   ele={element}
                   index={index}
                   setToDoElements={setToDoElements}
@@ -79,14 +80,14 @@ export default function Homepage() {
          
             
             <div className={style.DoneBoxContainer}>
-              {DoneElements.map((element, index) => {
+              {DoneElements?.map((element, index) => {
                 return (
                   <>
                     <div onClick={()=>{
                       DeleteNode(index) 
 
                     }}>
-                      <TrashElement ele={element}></TrashElement>
+                      <TrashElement key={index} ele={element}></TrashElement>
                     </div>
                   </>
                 )

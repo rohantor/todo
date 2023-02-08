@@ -19,14 +19,19 @@
 .tooltip {
     position: absolute;
     visibility: hidden;
-    text-overflow:ellipsis;
-  overflow:hidden; 
-  word-wrap:break-word;
-    right: 50%;
-    top: 50%;
-    height: 143px;
-    width: 384px;
-    background-color: #3d393966;
+    text-overflow: unset;
+    padding: 2em;
+    overflow: hidden;
+    word-wrap: break-word;
+    right: 30%;
+    top: 51%;
+    height: 130px;
+    border-radius: 28px;
+    width: 532px;
+    background-color: #ffffff;
+    border: solid 2px black;
+    border-right: 1rem;
+    box-shadow: 10px 8px 17px 10px #0000004f;
 }
 .container:hover .tooltip{
 
