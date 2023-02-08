@@ -5,10 +5,9 @@ import {
   useRef,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react'
-import style from './Element.module.css'
-
-
+import Style from './Element.module.css'
 
 export default function Element({
   ele,
@@ -20,7 +19,8 @@ export default function Element({
   setToDoElements: Dispatch<SetStateAction<{ text: string; color: string }[]>>
 }) {
   const [doubleClickToggle, setdoubleClickToggle] = useState(false)
-  const [textInput, setTextInput] = useState(ele.text)
+  const [textInput, setTextInput] = useState('')
+  
   const textInputRef = useRef<HTMLInputElement>(null)
   const handleDragStart = (event: DragEvent<HTMLDivElement>) => {
     let obj = event.target as HTMLDivElement
@@ -39,32 +39,33 @@ export default function Element({
 
   //   return dateTime
   // }
+  useEffect(()=>{
+    setTextInput(ele?.text)
+  },[ele?.text])
   const handleDoubleClick = () => {
     if (doubleClickToggle) {
       SaveState()
     }
     setdoubleClickToggle((prv) => !prv)
-
   }
-    const SaveState =()=>{
-      if (textInput === '') {
-        setTextInput(ele.text)
-      } 
-      setToDoElements((prv) => {
-        let newPrv = prv
-        newPrv[index].text = textInput
-        return newPrv
-      })
+  const SaveState = () => {
+    if (textInput === '') {
+      setTextInput(ele.text)
     }
+    setToDoElements((prv) => {
+      let newPrv = prv
+      newPrv[index].text = textInput
+      return newPrv
+    })
+  }
   function HandleOnchange(event: ChangeEvent<HTMLInputElement>): void {
-     
     setTextInput(event.target.value)
   }
 
   return (
     <>
       <div
-        className={style.container}
+        className={Style.container}
         draggable={true}
         onDragStart={handleDragStart}
         style={{ backgroundColor: `#${ele.color}` }}
@@ -80,14 +81,14 @@ export default function Element({
             style={{ backgroundColor: `#${ele.color}` }}
             onBlur={SaveState}
           ></input>
-        ) : textInput.length > 20 ? (
-          textInput.slice(0, 20)
+        ) : textInput?.length > 20 ? (
+          textInput?.slice(0, 20)
         ) : (
           textInput
         )}
 
-        {textInput.length > 20 ? (
-          <p className={style.tooltip}>{textInput}</p>
+        {textInput?.length > 20 ? (
+          <p className={Style.tooltip}>{textInput}</p>
         ) : (
           true
         )}
