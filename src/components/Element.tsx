@@ -45,7 +45,6 @@ export default function Element({
     }
     setdoubleClickToggle((prv) => !prv)
 
-    console.log('Double Click')
   }
     const SaveState =()=>{
       if (textInput === '') {

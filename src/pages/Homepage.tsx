@@ -17,7 +17,7 @@ export default function Homepage() {
   
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     const index = event.dataTransfer.getData('index')
-    const rgb = event.dataTransfer.getData('color')
+    
     let temp = DoneElements
 
     
@@ -25,8 +25,7 @@ export default function Homepage() {
 
     setToDoElements((prv) => prv.filter((_, i) => i !== parseInt(index)))
 
-    console.log(index)
-    console.log(rgb)
+   
   }
   const DeleteNode = (index:number)=>{
       setDoneElements((prv) => prv.filter((e, i) => i !== index))
@@ -35,7 +34,9 @@ export default function Homepage() {
     <div>
       <h1>
         To
-        <img src='./todo.png' style={{ width: '100px' }}></img>
+        <img src='./todo.png' style={{ width: '100px' }}
+        alt="To Do "
+        ></img>
         Do
       </h1>
       <section>
