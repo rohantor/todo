@@ -1,13 +1,16 @@
-import React, { useState, Dispatch, SetStateAction, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import Covered from '../assets/trash-cover.svg'
 import UnCovered from '../assets/trash-uncovered.svg'
 import style from './Input.module.css'
+import { useDispatch } from 'react-redux'
+import { todoSliceActions } from '../store/toDoReducers'
 interface propsInterface {
-  setToDoElements: Dispatch<SetStateAction<{ text: string; color: string }[]>>
 }
 export default function Input(props: propsInterface) {
   const [textAreaInput, setTextAreaInput] = useState('')
   const [trashOpen ,setTrashOpen] =useState(false)
+  const dispatch = useDispatch()
+
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setTextAreaInput(event.target.value)
   }
@@ -23,20 +26,17 @@ export default function Input(props: propsInterface) {
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     const index = event.dataTransfer.getData('index')
          setTrashOpen((prv) => !prv)
-
-
-    
-
-    props.setToDoElements((prv) => prv.filter((_, i) => i !== parseInt(index)))
-
-    
+         dispatch(todoSliceActions.remove(index))
   }
+  
   const Add = () => {
     if (textAreaInput !== '') {
-      props.setToDoElements((prv) => [
-        ...prv,
-        { text: textAreaInput, color: Random() },
-      ])
+      dispatch(
+        todoSliceActions.addTodo({
+          text: textAreaInput,
+          color: Random(),
+        })
+      )
       setTextAreaInput('')
     }
   }

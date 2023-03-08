@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, memo } from 'react'
 import Element from '../components/Element'
 import style from './Homepage.module.css'
 import Input from '../components/Input'
 import TrashElement from '../components/TrashElement'
-interface JSONAPIData {
-  userId: Number
-  id: Number
-  title: string
-  completed: Boolean
-}
-export default function Homepage() {
-  const [ToDoelements, setToDoElements] = useState<
-    Array<{ text: string; color: string }>
-  >([])
-  const [DoneElements, setDoneElements] = useState<
-    Array<{ text: string; color: string }>
-  >([])
+import  { todoSliceActions } from '../store/toDoReducers'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootStateType } from '../store/store'
+import { doneSliceActions } from '../store/doneReducer'
+
+export default memo(function Homepage() {
+  const dispatch = useDispatch()
+  const ToDoelements = useSelector((state: RootStateType) => state.todo)
+  const DoneElements = useSelector((state: RootStateType) => state.done)
 
   const enableDropping = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
@@ -23,45 +19,15 @@ export default function Homepage() {
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     const index = event.dataTransfer.getData('index')
-
-    let temp = DoneElements
-
-    setDoneElements([ToDoelements[parseInt(index)], ...temp])
-
-    setToDoElements((prv) => prv.filter((_, i) => i !== parseInt(index)))
+    dispatch(doneSliceActions.addToDone(ToDoelements[parseInt(index)]))
+    dispatch(todoSliceActions.remove(index))
   }
   const DeleteNode = (index: number) => {
-    setDoneElements((prv) => prv.filter((e, i) => i !== index))
+    dispatch(doneSliceActions.remove(index))
   }
-  const Random = () => {
-    var randomColor = Math.floor(Math.random() * 16777215).toString(16)
-    return randomColor
-  }
-  const makeArrangements = (data: JSONAPIData[]) => {
-    const ToDo: Array<{ text: string; color: string }> = []
-    const Done: Array<{ text: string; color: string }> = []
-    for (let i = 0; i < data.length; i++) {
-      let temp = {
-        text: data[i].title,
-        color: Random(),
-      }
-      if (data[i].completed) {
-        Done.push(temp)
-      }
-      ToDo.push(temp)
-    }
-    setToDoElements(ToDo)
-    setDoneElements(Done)
-    
-  }
+
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users/1/todos')
-      .then((response) => response.json())
-      .then((json) =>
-        makeArrangements(
-          json
-        )
-      )
+    dispatch({ type: 'fecthTodo' })
   }, [])
   return (
     <div>
@@ -80,12 +46,7 @@ export default function Homepage() {
           {ToDoelements.map((element, index) => {
             return (
               <>
-                <Element
-                  key={index}
-                  ele={element}
-                  index={index}
-                  setToDoElements={setToDoElements}
-                ></Element>
+                <Element key={index} ele={element} index={index}></Element>
               </>
             )
           })}
@@ -96,7 +57,7 @@ export default function Homepage() {
         / */}
         <div className={style.InputContainer}>
           Enter Here
-          <Input setToDoElements={setToDoElements} />
+          <Input />
         </div>
         {/* //
         
@@ -128,4 +89,4 @@ export default function Homepage() {
       </section>
     </div>
   )
-}
+})
